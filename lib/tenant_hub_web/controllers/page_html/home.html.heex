@@ -1,0 +1,42 @@
+<!-- home.html.heex -->
+<div class="min-h-screen bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 animate-gradient-x flex items-center justify-center">
+  <div class="max-w-6xl w-full mx-auto p-8 bg-white shadow-xl rounded-lg">
+    <header class="text-center mb-8">
+      <!-- Replace with your rental logo -->
+      <img src="/images/rental-logo.png" alt="Rental Logo" class="w-32 h-32 mx-auto mb-6 rounded-full border-4 border-white shadow-lg" />
+      <h1 class="text-4xl font-bold text-white-800">Hello dear, Welcome to Your Rental Dashboard</h1>
+      
+    </header>
+    
+    <!-- Dashboard Buttons -->
+    <div class="flex flex-col md:flex-row gap-6 justify-center">
+      <a href="/user/dashboard" class="w-full md:w-auto px-8 py-4 text-center bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200">
+        User Dashboard
+      </a>
+      <a href="/admin/dashboard" class="w-full md:w-auto px-8 py-4 text-center bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-200">
+        Admin Dashboard
+      </a>
+    </div>
+    
+    <!-- Additional Information Section -->
+    <section class="mt-10 text-center">
+      <p class="text-gray-500">Manage properties, view reports, and access more features.</p>
+      <p class="text-gray-400 text-sm mt-2">Need help? Contact us at <a href="mailto:support@example.com" class="text-blue-500 underline">support@example.com</a></p>
+    </section>
+  </div>
+</div>
+
+<style>
+  /* Animation for dynamic gradient background */
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Apply the animation to the background */
+  .animate-gradient-x {
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+  }
+</style>

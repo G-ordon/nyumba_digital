@@ -1,0 +1,21 @@
+<div id="faq" class="faq-container px-4 py-8 max-w-4xl mx-auto">
+  <h2 class="text-3xl font-semibold text-center mb-8">Frequently Asked Questions</h2>
+  
+  <%= for faq <- @faqs do %>
+    <div class="faq-item mb-6">
+      <button
+        class="faq-question w-full text-left text-xl font-medium text-indigo-700 p-4 bg-indigo-50 rounded-lg focus:outline-none"
+        phx-click="toggle_answer"
+        phx-value-id={faq.id}
+      >
+        <%= faq.question %>
+      </button>
+      
+      <div id={"answer-#{faq.id}"} class={if faq.visible, do: "block p-4 bg-gray-50 text-gray-700 rounded-lg mt-2", else: "hidden p-4 bg-gray-50 text-gray-700 rounded-lg mt-2"}>
+        <%= faq.answer %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br>
+<a href="/dashboard/settings" class="back-button">Back</a>

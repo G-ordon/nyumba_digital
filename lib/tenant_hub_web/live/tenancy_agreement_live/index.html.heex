@@ -1,0 +1,50 @@
+<.header>
+  <h2>Listing Tenancy Agreements</h2>
+  <:actions>
+    <.link patch={~p"/tenancy_agreements/new"}>
+      <.button class="btn-new-tenancy">New Tenancy Agreement</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<div class="table-container">
+  <.table
+    id="tenancy_agreements"
+    rows={@streams.tenancy_agreements}
+    row_click={fn {_id, tenancy_agreement} -> JS.navigate(~p"/tenancy_agreements/#{tenancy_agreement}") end}
+  >
+    <:col :let={{_id, tenancy_agreement}} label="Tenant Name"><%= tenancy_agreement.tenant_name %></:col>
+    <:col :let={{_id, tenancy_agreement}} label="Tenant Address"><%= tenancy_agreement.tenant_address %></:col>
+    <:col :let={{_id, tenancy_agreement}} label="Tenant Phone"><%= tenancy_agreement.tenant_phone %></:col>
+    <:col :let={{_id, tenancy_agreement}} label="Rent"><%= tenancy_agreement.rent %></:col>
+    <:col :let={{_id, tenancy_agreement}} label="Deposit"><%= tenancy_agreement.deposit %></:col>
+    <:col :let={{_id, tenancy_agreement}} label="Start Date"><%= tenancy_agreement.start_date %></:col>
+    <:col :let={{_id, tenancy_agreement}} label="End Date"><%= tenancy_agreement.end_date %></:col>
+    <:action :let={{_id, tenancy_agreement}}>
+      <div class="sr-only">
+        <.link navigate={~p"/tenancy_agreements/#{tenancy_agreement}"}>Show</.link>
+      </div>
+      <.link patch={~p"/tenancy_agreements/#{tenancy_agreement}/edit"}>Edit</.link>
+    </:action>
+    <:action :let={{id, tenancy_agreement}}>
+      <.link
+        phx-click={JS.push("delete", value: %{id: tenancy_agreement.id}) |> hide("##{id}")}
+        data-confirm="Are you sure?"
+        class="btn-delete"
+      >
+        Delete
+      </.link>
+    </:action>
+  </.table>
+</div>
+
+<.modal :if={@live_action in [:new, :edit]} id="tenancy_agreement-modal" show on_cancel={JS.patch(~p"/tenancy_agreements")}>
+  <.live_component
+    module={TenantHubWeb.TenancyAgreementLive.FormComponent}
+    id={@tenancy_agreement.id || :new}
+    title={@page_title}
+    action={@live_action}
+    tenancy_agreement={@tenancy_agreement}
+    patch={~p"/tenancy_agreements"}
+  />
+</.modal>
